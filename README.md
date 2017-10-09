@@ -72,6 +72,7 @@ end
 ## TODO
 
 - [] Add support for specifying max sizes for individual images
+- [] Add proper tests
 
 ## Development
 
