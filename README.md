@@ -1,8 +1,17 @@
 # Kirigami
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/kirigami`. To experiment with that code, run `bin/console` for an interactive prompt.
+Cut the images in your assets dir to a web-friendly size.
 
-TODO: Delete this and the text above, and describe your gem
+Kirigami performs optimisations on your images to ensure they are web-friendly.
+
+By default, Kirigami uses the optimisation suggestions recommended by
+[Google's Page Speed Insights](https://developers.google.com/speed/docs/insights/OptimizeImages)
+
+In ImageMagick terms, these are:
+
+    convert original.jpg -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG -colorspace RGB new.jpg
+
+Image dimensions, extensions, and filenames are not changed.
 
 ## Installation
 
@@ -22,7 +31,42 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+**WARNING:** This will change the size and quality of images in your Rails application.
+Make sure you have read the documentation and have backed up your images before you proceed
+
+`$ rails kirigami:cut`
+
+## Configuration
+
+To configure options, add an initializer in `config/initializers/kirigami.rb`
+
+``` ruby
+Kirigami.configure do |config|
+
+  # Only convert images with these extensions (default: %w[ png jpg jpeg gif ])
+  self.config.image_extensions  ||= %w[ png jpg jpeg gif ]
+
+  # Create a backup copy of each image before conversion (default: true)
+  self.config.safe_mode         ||= true
+
+  # JPEG compression quality (default: "85%")
+  self.config.jpeg_compression_quality ||= '85%'
+
+  # An array of dirpaths where your images are located (defaults: "./app/assets/images")
+  self.config.image_paths ||= "[yourapp]/app/assets/images"
+
+  # Ignore images within these dirpaths (default: [])
+  self.config.exclude_paths     ||= []
+
+  # Set minimagick to debug mode (default: false)
+  self.config.debug = false
+
+end
+```
+
+## TODO
+
+- [] Add support for specifying max sizes for individual images
 
 ## Development
 
@@ -32,7 +76,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/bodacious/kirigami.
+Bug reports and pull requests are welcome on GitHub at https://github.com/katanacode/kirigami.
 
 ## License
 
