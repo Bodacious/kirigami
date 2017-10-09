@@ -1,0 +1,26 @@
+
+lib = File.expand_path("../lib", __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require "kirigami/version"
+
+Gem::Specification.new do |spec|
+  spec.name          = "kirigami"
+  spec.version       = Kirigami::VERSION
+  spec.authors       = ["Bodacious"]
+  spec.email         = ["gavin@katanacode.com"]
+
+  spec.summary       = %q{Cut down your assets/images to web-friendly sizes}
+  spec.description   = %q{Cut down your assets/images to a web-friendly sizes}
+  spec.homepage      = "https://github.com/katanacode/kirigami"
+  spec.license       = "MIT"
+
+  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
+    f.match(%r{^(test|spec|features)/})
+  end
+  # spec.bindir        = "exe"
+  # spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.require_paths = ["lib"]
+
+  spec.add_development_dependency "bundler", "~> 1.16.a"
+  spec.add_development_dependency "rake", "~> 10.0"
+end
