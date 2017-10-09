@@ -36,6 +36,11 @@ Make sure you have read the documentation and have backed up your images before 
 
 `$ rails kirigami:cut`
 
+This rake task will go through each of the images specified in your configuration and
+crop their size (if necessary), remove any metadata, and compress them (JPG only).
+
+To peek under the hood, check out [lib/kirigami/image.rb](lib/kirigami/image.rb:17-30)
+
 ## Configuration
 
 To configure options, add an initializer in `config/initializers/kirigami.rb`
