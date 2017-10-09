@@ -7,7 +7,7 @@ namespace :kirigami do
     bash_pattern = "{" + Kirigami.config.image_paths.join(",") + "}"
     Dir[bash_pattern].each do |image_path|
       exclude_path = Kirigami.config.exclude_paths.detect do |path|
-        path.realpath.to_s.in?(File.expand_path(image_path))
+        File.expand_path(image_path).to_s.starts_with?(path.realpath.to_s)
       end
       if exclude_path
         Kirigami.logger.debug("Skipping image because: #{exclude_path} is excluded")
