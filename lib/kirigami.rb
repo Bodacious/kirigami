@@ -20,6 +20,13 @@ module Kirigami
 
   self.config.jpeg_compression_quality ||= '85%'
 
+  self.config.jpeg_colorspace ||= 'RGB'
+
+  self.config.jpeg_sampling_factor ||= "4:2:0"
+
+  self.config.jpeg_interlacing ||= "JPEG"
+
+
   if defined?(Rails)
     rails_assets_path = File.join "./app/assets/images/**/*\.{%{formats}}"
     rails_image_paths = rails_assets_path % { formats: config.image_extensions.join(",") }
