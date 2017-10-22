@@ -28,7 +28,7 @@ module Kirigami
 
     ##
     #
-    JPEG_INTERLACING = "JPEG".freeze
+    JPEG_INTERLACING = "Plane".freeze
 
     ##
     #
