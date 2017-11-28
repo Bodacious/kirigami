@@ -66,7 +66,7 @@ Kirigami.configure do |config|
   # Set minimagick to debug mode (default: false)
   self.config.debug = false
 
-end
+end if defined?(Kirigami)
 ```
 
 ## TODO
