@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kirigami (0.4.3)
+    kirigami (0.4.4)
       activesupport
       mini_magick (>= 4.9.4)
       rails (>= 3.0.0)
