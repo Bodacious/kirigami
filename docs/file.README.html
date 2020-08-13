@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Kirigami
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="file_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'><h1>Kirigami</h1>
+
+<p>Cut the images in your assets dir to a web-friendly size.</p>
+
+<p>Kirigami performs optimisations on your images to ensure they are web-friendly.</p>
+
+<p>By default, Kirigami uses the optimisation suggestions recommended by
+<a href="https://developers.google.com/speed/docs/insights/OptimizeImages">Google&#39;s Page Speed Insights</a></p>
+
+<p>In ImageMagick terms, these are:</p>
+
+<pre class="code ruby"><code class="ruby">convert original.jpg -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG -colorspace RGB new.jpg
+</code></pre>
+
+<p>Image dimensions, extensions, and filenames are not changed.</p>
+
+<h2>Installation</h2>
+
+<p>Add this line to your application&#39;s Gemfile:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>kirigami</span><span class='tstring_end'>&#39;</span></span>
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre class="code ruby"><code class="ruby">$ gem install kirigami
+</code></pre>
+
+<h2>Usage</h2>
+
+<p><strong>WARNING:</strong> This will change the size and quality of images in your Rails application.
+Make sure you have read the documentation and have backed up your images before you proceed</p>
+
+<p><code>$ rails kirigami:cut</code></p>
+
+<p>This rake task will go through each of the images specified in your configuration and
+crop their size (if necessary), remove any metadata, and compress them (JPG only).</p>
+
+<p>To peek under the hood, check out <a href="lib/kirigami/image.rb#L28-L41">lib/kirigami/image.rb</a></p>
+
+<h2>Configuration</h2>
+
+<p>To configure options, add an initializer in <code>config/initializers/kirigami.rb</code></p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'><span class='object_link'><a href="Kirigami.html" title="Kirigami (module)">Kirigami</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+
+  <span class='comment'># Only convert images with these extensions (default: %w[ png jpg jpeg gif ])
+</span>  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_image_extensions'>image_extensions</span>  <span class='op'>||=</span> <span class='qwords_beg'>%w[</span><span class='words_sep'> </span><span class='tstring_content'>png</span><span class='words_sep'> </span><span class='tstring_content'>jpg</span><span class='words_sep'> </span><span class='tstring_content'>jpeg</span><span class='words_sep'> </span><span class='tstring_content'>gif</span><span class='words_sep'> </span><span class='tstring_end'>]</span></span>
+
+  <span class='comment'># Create a backup copy of each image before conversion (default: true)
+</span>  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_safe_mode'>safe_mode</span>         <span class='op'>||=</span> <span class='kw'>true</span>
+
+  <span class='comment'># JPEG compression quality (default: &quot;85%&quot;)
+</span>  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_jpeg_compression_quality'>jpeg_compression_quality</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>85%</span><span class='tstring_end'>&#39;</span></span>
+
+  <span class='comment'># An array of dirpaths where your images are located (defaults: &quot;./app/assets/images&quot;)
+</span>  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_image_paths'>image_paths</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[yourapp]/app/assets/images</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='comment'># Ignore images within these dirpaths (default: [])
+</span>  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_exclude_paths'>exclude_paths</span>     <span class='op'>||=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+
+  <span class='comment'># Set minimagick to debug mode (default: false)
+</span>  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span> <span class='op'>=</span> <span class='kw'>false</span>
+
+<span class='kw'>end</span> <span class='kw'>if</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Kirigami.html" title="Kirigami (module)">Kirigami</a></span></span><span class='rparen'>)</span>
+</code></pre>
+
+<h2>TODO</h2>
+
+<ul>
+<li>[] Add support for specifying max sizes for individual images</li>
+<li>[] Add proper tests</li>
+</ul>
+
+<h2>Development</h2>
+
+<p>After checking out the repo, run <code>bin/setup</code> to install dependencies. You can also run <code>bin/console</code> for an interactive prompt that will allow you to experiment.</p>
+
+<p>To install this gem onto your local machine, run <code>bundle exec rake install</code>. To release a new version, update the version number in <code>version.rb</code>, and then run <code>bundle exec rake release</code>, which will create a git tag for the version, push git commits and tags, and push the <code>.gem</code> file to <a href="https://rubygems.org">rubygems.org</a>.</p>
+
+<h2>Contributing</h2>
+
+<p>Bug reports and pull requests are welcome on GitHub at <a href="https://github.com/katanacode/kirigami">https://github.com/katanacode/kirigami</a>.</p>
+
+<h2>License</h2>
+
+<p>The gem is available as open source under the terms of the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+</div></div>
+
+      <div id="footer">
+  Generated on Thu Aug 13 16:39:31 2020 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.24 (ruby-2.6.6).
+</div>
+
+    </div>
+  </body>
+</html>
