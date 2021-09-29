@@ -7,11 +7,11 @@ Gem::Specification.new do |spec|
   spec.name          = "kirigami"
   spec.version       = Kirigami::VERSION
   spec.authors       = ["Bodacious"]
-  spec.email         = ["gavin@katanacode.com"]
+  spec.email         = ["gavin@gavinmorric.com"]
 
   spec.summary       = %q{Cut down your assets/images to web-friendly sizes}
   spec.description   = %q{Cut down your assets/images to a web-friendly sizes}
-  spec.homepage      = "https://github.com/katanacode/kirigami"
+  spec.homepage      = "https://github.com/bodacious/kirigami"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
