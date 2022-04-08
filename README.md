@@ -71,8 +71,8 @@ end if defined?(Kirigami)
 
 ## TODO
 
-- [] Add support for specifying max sizes for individual images
-- [] Add proper tests
+- [ ] Add support for specifying max sizes for individual images
+- [ ] Add proper tests
 
 ## Development
 
